@@ -1,11 +1,10 @@
-import styles from './Header.module.css'
-
 import logo from '../assets/logo.svg'
 
 export function Header() {
    return (
-      <header className={styles.header}>
-         <img src={logo} alt className={styles.header__logo} />
+      <header className="flex gap-2 items-center justify-center py-5 bg-gray-900">
+         <img src={logo} alt className="block w-auto h-12" />
+         <p className="font-semibold text-lg text-red-500">Feed</p>
       </header>
    )
 }
