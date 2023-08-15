@@ -9,7 +9,7 @@ export function Sidebar() {
          <div className="flex flex-col items-center py-4 px-6">
             <img
                src="https://avatars.githubusercontent.com/u/25375556?v=4"
-               className="w-14 h-14 -mt-10 mb-4 rounded-lg border-4 border-gray-800 outline outline-red-400"
+               className="w-14 h-14 -mt-10 mb-4 rounded-lg border-4 border-gray-800 outline outline-1 outline-red-400"
             />
             <p className="font-semibold text-gray-100">Ivander Dias</p>
             <p className="text-sm">Web Developer</p>
