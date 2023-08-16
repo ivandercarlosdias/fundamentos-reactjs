@@ -1,29 +1,46 @@
+import { format, formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
+import { useState } from 'react'
+
 import { Avatar } from './Avatar'
 import { Comment } from './Comment'
 
-export function Post() {
+export function Post({ author, publishedAt, content }) {
+   const publishedFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
+      locale: ptBR,
+   })
+
+   const publishedToNow = formatDistanceToNow(publishedAt, {
+      locale: ptBR,
+      addSuffix: true,
+   })
+
+   const [comments, setComments] = useState([])
+
+   const handleFormSubmit = (e) => {
+      e.preventDefault()
+
+      setComments([...comments, comments.length + 1])
+   }
+
    return (
       <article className="p-10 mb-8 bg-gray-700 rounded-lg">
          <header className="flex items-center justify-between gap-4 mb-4">
             <div className="flex items-center gap-4">
-               <Avatar src="https://avatars.githubusercontent.com/u/25375556?v=4" />
+               <Avatar src={author.avatarUrl} />
                <div className="flex flex-col">
-                  <p className="font-semibold text-gray-100">Ivander Dias</p>
-                  <p className="text-sm">Web Developer</p>
+                  <p className="font-semibold text-gray-100">{author.name}</p>
+                  <p className="text-sm">{author.role}</p>
                </div>
             </div>
-            <time dateTime="2023-05-11 18:30:12" title="11 de Maio às 18:30" className="text-sm text-gray-400">
-               Publicado há 1h
+            <time dateTime={publishedAt.toISOString()} title={publishedFormatted} className="text-sm text-gray-400">
+               {publishedToNow}
             </time>
          </header>
          <div>
-            <p>
-               Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt autem, iste quos, repellendus
-               voluptatem dolor quae nemo numquam, eligendi earum esse ab. Explicabo debitis impedit aliquam quibusdam
-               nulla quos id?
-            </p>
+            <p>{content}</p>
          </div>
-         <form className="w-full mt-6 pt-6 border-t border-t-gray-600">
+         <form onSubmit={handleFormSubmit} className="w-full mt-6 pt-6 border-t border-t-gray-600">
             <p className="font-semibold text-gray-100 mb-3">Deixe seu feedback</p>
             <textarea
                placeholder="Deixe um comentário"
@@ -34,9 +51,9 @@ export function Post() {
             </button>
          </form>
          <div className="">
-            <Comment />
-            <Comment />
-            <Comment />
+            {comments.map((comment) => {
+               return <Comment />
+            })}
          </div>
       </article>
    )

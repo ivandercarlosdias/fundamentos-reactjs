@@ -4,6 +4,8 @@ import { Post } from './components/Post'
 
 import './index.css'
 
+import { database } from './database'
+
 export function App() {
    return (
       <>
@@ -11,11 +13,9 @@ export function App() {
          <div className="grid md:grid-cols-[256px_auto] gap-8 items-start max-w-6xl my-8 mx-auto px-4">
             <Sidebar />
             <main>
-               <Post author="Ivander" content="Lorem ipsum dolor sit amet consectetur adipisicing elit." />
-               <Post
-                  author="Giovanna"
-                  content="Quasi minima illo sint praesentium expedita maiores, nisi, aliquam dolor voluptatibus aspernatur voluptatem rem quibusdam minus soluta."
-               />
+               {database.map((post) => {
+                  return <Post author={post.author} content={post.content} publishedAt={post.publishedAt} />
+               })}
             </main>
          </div>
       </>
