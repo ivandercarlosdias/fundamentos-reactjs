@@ -8,7 +8,7 @@ export function App() {
    return (
       <>
          <Header />
-         <div className="grid grid-cols-[256px_auto] gap-8 items-start max-w-6xl my-8 mx-auto px-4">
+         <div className="grid md:grid-cols-[256px_auto] gap-8 items-start max-w-6xl my-8 mx-auto px-4">
             <Sidebar />
             <main>
                <Post author="Ivander" content="Lorem ipsum dolor sit amet consectetur adipisicing elit." />

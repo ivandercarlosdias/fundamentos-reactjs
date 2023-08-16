@@ -1,12 +1,12 @@
+import { Avatar } from './Avatar'
+import { Comment } from './Comment'
+
 export function Post() {
    return (
       <article className="p-10 mb-8 bg-gray-700 rounded-lg">
          <header className="flex items-center justify-between gap-4 mb-4">
             <div className="flex items-center gap-4">
-               <img
-                  src="https://avatars.githubusercontent.com/u/25375556?v=4"
-                  className="w-14 h-14 rounded-lg border-4 border-gray-800 outline outline-1 outline-red-400"
-               />
+               <Avatar src="https://avatars.githubusercontent.com/u/25375556?v=4" />
                <div className="flex flex-col">
                   <p className="font-semibold text-gray-100">Ivander Dias</p>
                   <p className="text-sm">Web Developer</p>
@@ -29,13 +29,15 @@ export function Post() {
                placeholder="Deixe um comentário"
                className="w-full p-4 bg-gray-800 text-gray-400 text-sm resize-none border-none outline-none rounded-lg focus:outline-1 focus:outline-gray-400"
             />
-            <button
-               type="submit"
-               className="cursor-pointer py-2 px-4 text-xs mt-3 border text-red-400 border-red-400 rounded-lg"
-            >
+            <button type="submit" className="py-2 px-4 text-xs mt-3 border text-red-400 border-red-400 rounded-lg">
                Publicar
             </button>
          </form>
+         <div className="">
+            <Comment />
+            <Comment />
+            <Comment />
+         </div>
       </article>
    )
 }
