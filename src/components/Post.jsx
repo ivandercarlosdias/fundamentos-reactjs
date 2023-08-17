@@ -16,11 +16,17 @@ export function Post({ author, publishedAt, content }) {
    })
 
    const [comments, setComments] = useState([])
+   const [newComentText, setNewCommentText] = useState('')
 
    const handleFormSubmit = (e) => {
       e.preventDefault()
 
-      setComments([...comments, comments.length + 1])
+      setComments([...comments, newComentText])
+      setNewCommentText('')
+   }
+
+   const handleNewComment = (e) => {
+      setNewCommentText(e.target.value)
    }
 
    return (
@@ -43,6 +49,9 @@ export function Post({ author, publishedAt, content }) {
          <form onSubmit={handleFormSubmit} className="w-full mt-6 pt-6 border-t border-t-gray-600">
             <p className="font-semibold text-gray-100 mb-3">Deixe seu feedback</p>
             <textarea
+               onChange={handleNewComment}
+               name="comment_input"
+               value={newComentText}
                placeholder="Deixe um comentário"
                className="w-full p-4 bg-gray-800 text-gray-400 text-sm resize-none border-none outline-none rounded-lg focus:outline-1 focus:outline-gray-400"
             />
@@ -52,7 +61,7 @@ export function Post({ author, publishedAt, content }) {
          </form>
          <div className="">
             {comments.map((comment) => {
-               return <Comment />
+               return <Comment content={comment} />
             })}
          </div>
       </article>

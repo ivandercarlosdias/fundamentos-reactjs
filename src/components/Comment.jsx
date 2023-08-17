@@ -1,7 +1,7 @@
 import { Avatar } from './Avatar'
 import { Trash, ThumbsUp } from '@phosphor-icons/react'
 
-export function Comment() {
+export function Comment({ content }) {
    return (
       <div className="mt-6 flex gap-4">
          <Avatar hasBorder={false} size="small" src="https://avatars.githubusercontent.com/u/25375556?v=4" />
@@ -18,7 +18,7 @@ export function Comment() {
                      <Trash size={20} className="text-gray-500 border-none rounded-sm hover:text-red-400" />
                   </button>
                </div>
-               <p className="text-gray-500">Lorem ipsum dolor, sit amet consectetur adipisicing elit!</p>
+               <p className="text-gray-500">{content}</p>
             </div>
             <button className="flex items-center text-xs text-gray-500 hover:text-cyan-500">
                <ThumbsUp className="mr-2" />
