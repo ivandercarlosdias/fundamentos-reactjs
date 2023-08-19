@@ -1,7 +1,19 @@
-import { Avatar } from './Avatar'
+import { useState } from 'react'
 import { Trash, ThumbsUp } from '@phosphor-icons/react'
 
-export function Comment({ content }) {
+import { Avatar } from './Avatar'
+
+export function Comment({ content, onDeleteComment }) {
+   const handleDeleteComment = () => {
+      onDeleteComment(content)
+   }
+
+   const [likeCount, setLikeCount] = useState(0)
+
+   const handleLikeComment = (value) => {
+      setLikeCount(likeCount + value)
+   }
+
    return (
       <div className="mt-6 flex gap-4">
          <Avatar hasBorder={false} size="small" src="https://avatars.githubusercontent.com/u/25375556?v=4" />
@@ -14,16 +26,19 @@ export function Comment({ content }) {
                         Cerca de 1h atrás
                      </time>
                   </div>
-                  <button>
+                  <button onClick={handleDeleteComment}>
                      <Trash size={20} className="text-gray-500 border-none rounded-sm hover:text-red-400" />
                   </button>
                </div>
                <p className="text-gray-500">{content}</p>
             </div>
-            <button className="flex items-center text-xs text-gray-500 hover:text-cyan-500">
+            <button
+               onClick={() => handleLikeComment(1)}
+               className="flex items-center text-xs text-gray-500 hover:text-cyan-500"
+            >
                <ThumbsUp className="mr-2" />
                <p>Aplaudir</p>
-               <span className="ml-2 before:pr-2 before:content-['•']">20</span>
+               <span className="ml-2 before:pr-2 before:content-['•']">{likeCount}</span>
             </button>
          </div>
       </div>

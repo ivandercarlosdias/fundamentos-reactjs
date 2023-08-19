@@ -29,6 +29,16 @@ export function Post({ author, publishedAt, content }) {
       setNewCommentText(e.target.value)
    }
 
+   const deleteComment = (commentToDelete) => {
+      const commentsWithoutDeletedComement = comments.filter((comment) => {
+         return comment !== commentToDelete
+      })
+
+      setComments(commentsWithoutDeletedComement)
+   }
+
+   const isNewCommentEmpty = newComentText.length === 0
+
    return (
       <article className="p-10 mb-8 bg-gray-700 rounded-lg">
          <header className="flex items-center justify-between gap-4 mb-4">
@@ -54,14 +64,19 @@ export function Post({ author, publishedAt, content }) {
                value={newComentText}
                placeholder="Deixe um comentário"
                className="w-full p-4 bg-gray-800 text-gray-400 text-sm resize-none border-none outline-none rounded-lg focus:outline-1 focus:outline-gray-400"
+               required
             />
-            <button type="submit" className="py-2 px-4 text-xs mt-3 border text-red-400 border-red-400 rounded-lg">
+            <button
+               type="submit"
+               className="py-2 px-4 text-xs mt-3 border text-red-400 border-red-400 rounded-lg disabled:opacity-40 disabled:cursor-default"
+               disabled={isNewCommentEmpty}
+            >
                Publicar
             </button>
          </form>
          <div className="">
             {comments.map((comment) => {
-               return <Comment content={comment} />
+               return <Comment key={comment} content={comment} onDeleteComment={deleteComment} />
             })}
          </div>
       </article>
