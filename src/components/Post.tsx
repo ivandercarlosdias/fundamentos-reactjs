@@ -1,12 +1,24 @@
 import { format, formatDistanceToNow } from 'date-fns'
 import ptBR from 'date-fns/locale/pt-BR'
-import { useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 
 import { Avatar } from './Avatar'
 import { Comment } from './Comment'
 
-export function Post({ author, publishedAt, content }) {
-   const publishedFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
+interface Author {
+   name: string
+   role: string
+   avatarUrl: string
+}
+
+interface PostProps {
+   author: Author
+   publishedAt: Date
+   content: string
+}
+
+export function Post({ author, publishedAt, content }: PostProps) {
+   const publishedFormatted = format(publishedAt, "d 'de' LLLL 'às' HH:mm", {
       locale: ptBR,
    })
 
@@ -15,21 +27,21 @@ export function Post({ author, publishedAt, content }) {
       addSuffix: true,
    })
 
-   const [comments, setComments] = useState([])
-   const [newComentText, setNewCommentText] = useState('')
+   const [comments, setComments] = useState<string[]>([])
+   const [newCommentText, setNewCommentText] = useState<string>('')
 
-   const handleFormSubmit = (e) => {
-      e.preventDefault()
+   const handleFormSubmit = (event: FormEvent) => {
+      event.preventDefault()
 
-      setComments([...comments, newComentText])
+      setComments([...comments, newCommentText])
       setNewCommentText('')
    }
 
-   const handleNewComment = (e) => {
-      setNewCommentText(e.target.value)
+   const handleNewComment = (event: ChangeEvent<HTMLTextAreaElement>) => {
+      setNewCommentText(event.target.value)
    }
 
-   const deleteComment = (commentToDelete) => {
+   const deleteComment = (commentToDelete: string) => {
       const commentsWithoutDeletedComement = comments.filter((comment) => {
          return comment !== commentToDelete
       })
@@ -37,7 +49,7 @@ export function Post({ author, publishedAt, content }) {
       setComments(commentsWithoutDeletedComement)
    }
 
-   const isNewCommentEmpty = newComentText.length === 0
+   const isNewCommentEmpty = newCommentText.length === 0
 
    return (
       <article className="p-10 mb-8 bg-gray-700 rounded-lg">
@@ -61,7 +73,7 @@ export function Post({ author, publishedAt, content }) {
             <textarea
                onChange={handleNewComment}
                name="comment_input"
-               value={newComentText}
+               value={newCommentText}
                placeholder="Deixe um comentário"
                className="w-full p-4 bg-gray-800 text-gray-400 text-sm resize-none border-none outline-none rounded-lg focus:outline-1 focus:outline-gray-400"
                required

@@ -1,4 +1,10 @@
-export function Avatar({ hasBorder = true, src, size }) {
+interface AvatarProps {
+   hasBorder?: boolean
+   src: string
+   size?: string
+}
+
+export function Avatar({ hasBorder = true, src, size }: AvatarProps) {
    return (
       <img
          src={src}

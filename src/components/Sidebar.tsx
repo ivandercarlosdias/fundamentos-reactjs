@@ -9,8 +9,8 @@ export function Sidebar() {
       <aside className="overflow-hidden rounded-lg bg-gray-700">
          <img src={coverPlaceholder} className="w-full h-20 object-cover" />
          <div className="flex flex-col items-center py-4 px-6 -mt-10">
-            <Avatar src="https://avatars.githubusercontent.com/u/25375556?v=4" />
-            <p className="mt-4 font-semibold text-gray-100">Ivander Dias</p>
+            <Avatar src="https://picsum.photos/128/128?random=3" />
+            <p className="mt-4 font-semibold text-gray-100">Ivander</p>
             <p className="text-sm">Web Developer</p>
          </div>
          <hr className="w-full border-t-2 border-t-gray-800 border-b border-b-[#232633]" />
